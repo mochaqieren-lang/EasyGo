@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#087b51" />
+    <meta name="description" content="EasyGo helps visitors explore China with cultural routes, travel essentials, booking, translation, local guides and shopping." />
+    <title>EasyGo — Explore China with confidence</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23087b51'/%3E%3Cpath d='M15 36 32 17l17 19-17 13z' fill='none' stroke='white' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='34' r='5' fill='%23f2a94c'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <script src="vendor/leaflet/leaflet.js" defer></script>
+    <script src="map.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+          <img class="brand-logo" src="assets/logo.png" alt="">
+          <span>EasyGo</span>
+        </div>
+        <p class="sidebar-caption" data-i18n="tagline">Your China travel companion</p>
+        <nav id="nav" class="nav"></nav>
+        <div class="sidebar-bottom">
+          <span class="eyebrow" data-i18n="demo">INTERACTIVE CONCEPT</span>
+          <p data-i18n="demoNote">Explore a sample journey through Beijing.</p>
+          <button id="feedbackButton" class="feedback-button" type="button" data-i18n="feedback">Feedback</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div class="mobile-brand">✦ EasyGo</div>
+          <div class="topbar-right">
+            <span class="location-pill">⌖ 
+              <span data-i18n="beijing">Beijing, China</span>
+            </span>
+            <button id="langToggle" class="text-button" type="button" aria-label="Switch language">中文</button>
+            <button id="tripButton" class="trip-button" type="button">
+              <span data-i18n="myTrip">My trip</span>
+              <span id="tripCount">0</span>
+            </button>
+          </div>
+        </header>
+        <div id="content" class="content" tabindex="-1"></div>
+        <footer class="footer">
+          <span>EasyGo · 
+            <span data-i18n="footerText">A concept experience for visiting China</span>
+          </span>
+        </footer>
+      </main>
+    </div>
+    <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation"></nav>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="modal" class="modal">
+      <button id="closeModal" class="modal-close" type="button" aria-label="Close">×</button>
+      <div id="modalBody"></div>
+    </dialog>
+  </body>
+</html>
