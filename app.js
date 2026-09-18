@@ -360,7 +360,7 @@ function maps()
       <div class="map-layout">
         <div class="map-surface">
           <div id="mapCanvas" class="interactive-map" aria-label="${state.lang === 'en' ? 'Interactive map of nearby places' : '附近地点交互地图'}"></div>
-          <div id="mapTileFallback" class="map-tile-fallback" hidden role="status">${state.lang === 'en' ? 'The map background was blocked. In VS Code, open index.html with Live Server and refresh the page. Pins remain available.' : '地图底图被拦截。请在 VS Code 中用 Live Server 打开 index.html，再刷新页面；图钉仍可使用。'}</div>
+          <div id="mapTileFallback" class="map-tile-fallback" hidden role="status">${state.lang === 'en' ? 'The map background could not load on this network. Pins and the place list remain available.' : '当前网络暂时无法加载地图底图，图钉和地点列表仍可使用。'}</div>
           <button id="mapSearchArea" type="button" class="map-area-button">${state.lang === 'en' ? 'Search this area' : '搜索当前区域'}</button>
         </div>
         <aside class="map-results-panel">

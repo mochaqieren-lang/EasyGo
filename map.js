@@ -235,19 +235,21 @@
     }
 
     map = L.map('mapCanvas', { zoomControl: true }).setView(center, 14);
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
-    });
-    tiles.on('load', () => { tileLoaded = true; });
-    tiles.on('tileerror', () => {
-      if (tileLoaded || ++tileErrors < 3) return;
-      if (map.hasLayer(tiles)) map.removeLayer(tiles);
+    if (typeof L.maplibreGL === 'function') {
+      const tiles = L.maplibreGL({ style: 'https://tiles.openfreemap.org/styles/liberty' }).addTo(map);
+      const vectorMap = tiles.getMaplibreMap();
+      vectorMap.on('load', () => { tileLoaded = true; });
+      vectorMap.on('error', () => {
+        if (tileLoaded || ++tileErrors < 3) return;
+        const fallback = get('mapTileFallback');
+        if (fallback) fallback.hidden = false;
+        setStatus(label('Map background could not load. Check network access to the map provider.', '地图底图暂时无法加载，请检查网络是否能访问底图服务。'));
+      });
+      map.attributionControl.addAttribution('<a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> · &copy; <a href="https://openmaptiles.org" target="_blank" rel="noopener">OpenMapTiles</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors');
+    } else {
       const fallback = get('mapTileFallback');
       if (fallback) fallback.hidden = false;
-      setStatus(label('Map background unavailable. Open through Live Server and refresh.', '地图底图不可用。请用 Live Server 打开并刷新。'));
-    });
-    tiles.addTo(map);
+    }
     markerLayer = L.layerGroup().addTo(map);
     map.on('moveend', () => { center = [map.getCenter().lat, map.getCenter().lng]; });
     searchPlaces();
